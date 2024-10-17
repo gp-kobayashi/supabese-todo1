@@ -1,18 +1,52 @@
+import { SetStateAction } from "react";
 import styles from "./page.module.css";
+import { Todo } from "@/utils/interface";
+import { deleteTodo, getAllTodos, isCompletedTodo } from "@/utils/supabese_functions";
 
-export default function TodoList() {
-    return (
-      <div>
-        <ul>
-            <div className={styles.todo_item}>
-                <li className={styles.todo_title}>プログラミング</li>
-                <span className={styles.delete_btn}>削除</span>
+type Props = {
+  todos:Todo[];
+  setTodos: React.Dispatch<SetStateAction<Todo[]>>;
+}
+
+const TodoList = (props:Props) => {
+
+  const { todos, setTodos } = props;
+
+  const handleDelete = async (id: number) => {
+    await deleteTodo(id);
+    let todos = await getAllTodos();
+    setTodos(todos || []);
+}
+
+const handleIsCompleted = async (id: number, isCompleted:boolean) => {
+  const newIsCompleted = !isCompleted;
+  await isCompletedTodo(id,newIsCompleted);
+  let todos = await getAllTodos();
+  setTodos(todos || []);
+}
+
+    return <div>
+        <ul className={styles.todo_list}>
+          {todos.map((todo) => (
+            <div className={styles.todo_item} 
+            key={todo.id}>
+              <li className={todo.isCompleted ? styles.todo_title_active : styles.todo_title}>
+                {todo.title}
+                </li>
+              <div className={styles.todo_btn}>
+                <button className={styles.Completed_btn}
+                 onClick={() => handleIsCompleted(todo.id, todo.isCompleted)}>
+                  済
+                  </button>
+                <span className={styles.delete_btn} 
+                 onClick={() => handleDelete(todo.id)}>
+                  削除
+                  </span>                
+              </div>
             </div>
-            <div className={styles.todo_item}>
-                <li className={styles.todo_title}>プログラミング</li>
-                <span className={styles.delete_btn}>削除</span>
-            </div>
+          ))}
         </ul>
       </div>
-    );
-  }
+  };
+
+  export default TodoList;

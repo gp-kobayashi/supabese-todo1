@@ -1,17 +1,15 @@
 'use client'
 
 import { useEffect, useState } from "react";
+import { supabase } from "@/utils/supabese";
 import styles from "./page.module.css";
 import TodoList from "./TodoList";
 import { addTodo, getAllTodos } from "@/utils/supabese_functions";
+import { Todo } from "@/utils/interface";
 
-export default function TodoApp() {
+const TodoApp = () => {
 
-  interface Todo {
-    id: number;
-    title: string;
-    completed:boolean;
-}
+ 
   const [todos, setTodos] = useState<Todo[]>([]);
   const [title, setTitle] = useState<string>("");
     
@@ -38,12 +36,15 @@ export default function TodoApp() {
     return (
       <div>
         <form className={styles.todo_form} onSubmit={(e) => handleSubmit(e)}>
-          <input type="text" className={styles.todo_input}
+          <input type="text" placeholder="やること…"
+          className={styles.input}
           onChange={(e) => setTitle(e.target.value)}
           value={title}/>
           <button className={styles.add_btn}>記入</button>
         </form>
-        <TodoList/>
+        <TodoList todos={todos} setTodos={setTodos}/>
       </div>
     );
   }
+
+  export default TodoApp
