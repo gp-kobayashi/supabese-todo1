@@ -1,22 +1,62 @@
 
+.page_title{
+  border-bottom: 1px solid black;
+}
 
 .todo_form{
   display: flex;
+  max-width: 250px;
   margin: 0;
 }
+.input{
+  width: 70%;
+  margin-left: 10px;
+}
+.add_btn{
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: lightsteelblue;
+  margin-left: 10px;
+  
+}
 
-
+.todo_list{
+  padding: 0;
+}
 
 .todo_item{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   text-align: left;
   max-width: 300px;
   border-bottom: 1px solid black;
+  border-left: 5px solid orangered;
+  margin: 10px;
 }
-.title{
-  border-bottom: 1px solid black;
-}
+
 .todo_title{
   list-style: none;
+  padding: 5px;
+}
+.todo_title_active{
+  list-style: none;
+  padding: 5px;
+  text-decoration:line-through;
+}
+
+
+.delete_btn{
+  cursor: pointer;
+  background-color: orange;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.Completed_btn{
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  background-color: lightgreen;
+  margin:0 10px;
 }
