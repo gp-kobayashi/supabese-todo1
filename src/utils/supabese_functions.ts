@@ -6,7 +6,11 @@ export const getAllTodos = async () => {
 };
 
 export const addTodo = async (title:string) => {
-    await supabase.from("todo").insert({ title: title })
+    const { data, error } = await supabase.from("todo").insert({ title: title }).select();
+    if(error){
+        throw new Error("データ追加のエラー");
+    }
+    return data[0].id;
 };
 
 export const isCompletedTodo = async (id: number, isCompleted:boolean) => {

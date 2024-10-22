@@ -11,7 +11,7 @@ const TodoApp = () => {
  
   const [todos, setTodos] = useState<Todo[]>([]);
   const [title, setTitle] = useState<string>("");
-    
+
     useEffect(() => {
       const getTodos = async () => {
       const todos = await getAllTodos();
@@ -24,10 +24,10 @@ const TodoApp = () => {
     const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (title === "") return
-
-      await addTodo(title);
+      const newId:number = await addTodo(title);
       setTodos((prevTodos) =>{
-        const newTodos = [...prevTodos,{id:1 ,title:title,isCompleted:false}]
+        const newTodos = [...prevTodos,{id:newId ,title:title,isCompleted:false}]
+        console.log(newTodos);
         return newTodos;
       });
 

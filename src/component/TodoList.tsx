@@ -1,5 +1,5 @@
 import { SetStateAction } from "react";
-import styles from "./page.module.css";
+import styles from "./todo.module.css";
 import { Todo } from "@/utils/interface";
 import { deleteTodo, getAllTodos, isCompletedTodo } from "@/utils/supabese_functions";
 
@@ -14,9 +14,8 @@ const TodoList = (props:Props) => {
 
   const handleDelete = async (id: number) => {
     await deleteTodo(id);
-    let todos = await getAllTodos();
-    setTodos(todos || []);
-}
+    setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== id));
+  };
 
 const handleIsCompleted = async (id: number, isCompleted:boolean) => {
   const newIsCompleted = !isCompleted;
@@ -29,7 +28,7 @@ const handleIsCompleted = async (id: number, isCompleted:boolean) => {
         <ul className={styles.todo_list}>
           {todos.map((todo) => (
             <div className={styles.todo_item} 
-            key={todo.id}>
+            key={todo.id} >
               <li className={todo.isCompleted ? styles.todo_title_active : styles.todo_title}>
                 {todo.title}
                 </li>
