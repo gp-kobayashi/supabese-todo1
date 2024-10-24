@@ -14,7 +14,11 @@ export const addTodo = async (title:string) => {
 };
 
 export const isCompletedTodo = async (id: number, isCompleted:boolean) => {
-    await supabase.from("todo").update({ isCompleted: isCompleted }).eq("id", id)
+    const { data, error } = await supabase.from("todo").update({ isCompleted: isCompleted }).eq("id", id).select();
+    if(error){
+        throw new Error("完了・未完了のエラー");
+    }
+    return data[0];
 };
 
 export const deleteTodo = async (id: number) =>{

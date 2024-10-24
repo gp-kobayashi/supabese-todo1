@@ -19,9 +19,14 @@ const TodoList = (props:Props) => {
 
 const handleIsCompleted = async (id: number, isCompleted:boolean) => {
   const newIsCompleted = !isCompleted;
-  await isCompletedTodo(id,newIsCompleted);
-  let todos = await getAllTodos();
-  setTodos(todos || []);
+  const updatedTodo = await isCompletedTodo(id,newIsCompleted);
+  const newTodos = todos.map(todo => {
+    if (todo.id === updatedTodo.id) { 
+        return { ...todo, isCompleted: updatedTodo.isCompleted };
+    }
+    return todo;
+});
+setTodos(newTodos);
 }
 
     return <div>
