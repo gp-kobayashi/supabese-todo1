@@ -1,5 +1,5 @@
 import { SetStateAction } from "react";
-import styles from "./todo_list.module.css"
+import styles from "./styles/todo_list.module.css"
 import { Todo } from "@/utils/interface";
 import { deleteTodo, isCompletedTodo } from "@/utils/supabese_functions";
 
@@ -11,6 +11,7 @@ type Props = {
 const TodoList = (props:Props) => {
   
   const { todos, setTodos } = props;
+  
   const handleDelete = async (id: number) => {
     await deleteTodo(id);
     setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== id));

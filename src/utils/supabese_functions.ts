@@ -22,5 +22,9 @@ export const isCompletedTodo = async (id: number, isCompleted:boolean) => {
 };
 
 export const deleteTodo = async (id: number) =>{
-    await supabase.from("todo").delete().eq("id", id)
+    const { data, error } = await supabase.from("todo").delete().eq("id", id).select()
+    if(error){
+        throw new Error("削除のエラー");
+    }
+    return data[0];
 };

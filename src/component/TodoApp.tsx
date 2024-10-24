@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import styles from "./todo_app.module.css"
+import styles from "./styles/todo_app.module.css"
 import TodoList from "./TodoList";
 import { addTodo, getAllTodos } from "@/utils/supabese_functions";
 import { Todo } from "@/utils/interface";
@@ -15,7 +15,6 @@ const TodoApp = () => {
     const getTodos = async () => {
     const todos = await getAllTodos();
       setTodos(todos || []);
-      console.log(todos);
     }
     getTodos();
   }, []);
