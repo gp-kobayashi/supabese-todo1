@@ -1,4 +1,4 @@
-import { SetStateAction } from "react";
+import { SetStateAction, useCallback } from "react";
 import styles from "./styles/todo_list.module.css"
 import { Todo } from "@/utils/interface";
 import { deleteTodo, isCompletedTodo } from "@/utils/supabese_functions";
@@ -11,13 +11,13 @@ type Props = {
 const TodoList = (props:Props) => {
   
   const { todos, setTodos } = props;
-  
-  const handleDelete = async (id: number) => {
+
+  const handleDelete = useCallback( async (id: number) => {
     await deleteTodo(id);
     setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== id));
-  };
+  },[todos]);
 
-  const handleIsCompleted = async (id: number, isCompleted:boolean) => {
+  const handleIsCompleted = useCallback(async (id: number, isCompleted:boolean) => {
     const newIsCompleted = !isCompleted;
     const updatedTodo = await isCompletedTodo(id,newIsCompleted);
     const newTodos = todos.map(todo => {
@@ -27,7 +27,7 @@ const TodoList = (props:Props) => {
       return todo;
     });
     setTodos(newTodos);
-  }
+  },[todos]);
 
     return <div>
       <ul className={styles.todo_list}>

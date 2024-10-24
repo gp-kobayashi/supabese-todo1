@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styles from "./styles/todo_app.module.css"
 import TodoList from "./TodoList";
 import { addTodo, getAllTodos } from "@/utils/supabese_functions";
@@ -19,7 +19,7 @@ const TodoApp = () => {
     getTodos();
   }, []);
 
-  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (title === "") return
     const newId:number = await addTodo(title);
@@ -29,7 +29,7 @@ const TodoApp = () => {
       return newTodos;
     });
     setTitle("");
-  };
+  },[title])
 
   return (
     <div>
