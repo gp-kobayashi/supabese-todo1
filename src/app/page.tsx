@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import TodoApp from "./TodoApp";
+import TodoApp from "../component/TodoApp";
 
 
 export default function Home() {
