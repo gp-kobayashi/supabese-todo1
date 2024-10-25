@@ -13,9 +13,9 @@ const TodoList = (props:Props) => {
   const { todos, setTodos } = props;
 
   const handleDelete = useCallback( async (id: number) => {
-    await deleteTodo(id);
-    setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== id));
-  },[todos]);
+    const newTodo = await deleteTodo(id);
+      setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== id));
+  },[setTodos]);
 
   const handleIsCompleted = useCallback(async (id: number, isCompleted:boolean) => {
     const newIsCompleted = !isCompleted;
@@ -27,7 +27,7 @@ const TodoList = (props:Props) => {
       return todo;
     });
     setTodos(newTodos);
-  },[todos]);
+  },[todos,setTodos]);
 
     return <div>
       <ul className={styles.todo_list}>
