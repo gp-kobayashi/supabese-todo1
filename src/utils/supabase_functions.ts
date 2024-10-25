@@ -1,4 +1,4 @@
-import { supabase } from "./supabese";
+import { supabase } from "./supabase";
 
 export const getAllTodos = async () => {
     const todos = await supabase.from("todo").select("*").order('id', {ascending: true});

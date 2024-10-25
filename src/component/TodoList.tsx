@@ -1,7 +1,7 @@
 import { SetStateAction, useCallback } from "react";
 import styles from "./styles/todo_list.module.css"
 import { Todo } from "@/utils/interface";
-import { deleteTodo, isCompletedTodo } from "@/utils/supabese_functions";
+import { deleteTodo, isCompletedTodo } from "@/utils/supabase_functions";
 
 type Props = {
   todos:Todo[];
