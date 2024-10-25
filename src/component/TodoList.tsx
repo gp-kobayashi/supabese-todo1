@@ -14,7 +14,7 @@ const TodoList = (props:Props) => {
 
   const handleDelete = useCallback( async (id: number) => {
     const updatedTodo = await deleteTodo(id);
-    if(updatedTodo == null){
+    if(updatedTodo){
       setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== id));
     }
   },[setTodos]);
