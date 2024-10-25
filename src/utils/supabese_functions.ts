@@ -25,6 +25,8 @@ export const deleteTodo = async (id: number) =>{
     const { data, error } = await supabase.from("todo").delete().eq("id", id).select()
     if(error){
         throw new Error("削除のエラー");
+    }if(data == null){
+        return null;
     }
     return data[0];
 };

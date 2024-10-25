@@ -13,8 +13,10 @@ const TodoList = (props:Props) => {
   const { todos, setTodos } = props;
 
   const handleDelete = useCallback( async (id: number) => {
-    const newTodo = await deleteTodo(id);
+    const updatedTodo = await deleteTodo(id);
+    if(updatedTodo == null){
       setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== id));
+    }
   },[setTodos]);
 
   const handleIsCompleted = useCallback(async (id: number, isCompleted:boolean) => {
