@@ -22,14 +22,10 @@ const TodoApp = () => {
   const handleSubmit = useCallback(async (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (title === "") return
-    const newId:number = await addTodo(title);
-    setTodos((prevTodos) =>{
-      const newTodos = [...prevTodos,{id:newId ,title:title,isCompleted:false}]
-      console.log(newTodos);
-      return newTodos;
-    });
+    const updateTodo :Todo = await addTodo(title);
+    setTodos((prevTodos) => [...prevTodos, { ...updateTodo, title, isCompleted: false }]);
     setTitle("");
-  },[title])
+  },[title, addTodo]);
 
   return (
     <div>
