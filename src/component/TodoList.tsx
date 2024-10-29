@@ -13,15 +13,14 @@ const TodoList = (props:Props) => {
   const { todos, setTodos } = props;
 
   const handleDelete = useCallback( async (id: number) => {
-    const updatedTodo = await deleteTodo(id);
-    if(updatedTodo){
+    const updateTodo = await deleteTodo(id);
+    if(updateTodo){
       setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== id));
     }
   },[setTodos]);
 
   const handleIsCompleted = useCallback(async (id: number, isCompleted:boolean) => {
-    const newIsCompleted = !isCompleted;
-    const updatedTodo = await isCompletedTodo(id,newIsCompleted);
+    const updatedTodo = await isCompletedTodo(id,!isCompleted);
     const newTodos = todos.map(todo => {
       if (todo.id === updatedTodo.id) { 
           return { ...todo, isCompleted: updatedTodo.isCompleted };
@@ -34,11 +33,11 @@ const TodoList = (props:Props) => {
     return <div>
       <ul className={styles.todo_list}>
         {todos.map((todo) => (
-          <div className={styles.todo_item} 
+          <li className={styles.todo_item} 
             key={todo.id} >
-            <li className={todo.isCompleted ? styles.todo_title_complete : styles.todo_title}>
+            <div className={todo.isCompleted ? styles.todo_title_complete : styles.todo_title}>
               {todo.title}
-            </li>
+            </div>
             <div>
               <button className={styles.Completed_btn}
                 onClick={() => handleIsCompleted(todo.id, todo.isCompleted)}>
@@ -49,7 +48,7 @@ const TodoList = (props:Props) => {
                   削除
               </span>                
             </div>
-          </div>
+          </li>
         ))}
       </ul>
     </div>
