@@ -22,8 +22,8 @@ const TodoApp = () => {
   const handleSubmit = useCallback(async (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (title === "") return
-    const updateTodo :Todo = await addTodo(title);
-    setTodos((prevTodos) => [...prevTodos, { ...updateTodo, title, isCompleted: false }]);
+    const updatedTodo :Todo = await addTodo(title);
+    setTodos((prevTodos) => [...prevTodos, { ...updatedTodo, title, isCompleted: false }]);
     setTitle("");
   },[title]);
 
