@@ -25,7 +25,7 @@ const TodoApp = () => {
     const updateTodo :Todo = await addTodo(title);
     setTodos((prevTodos) => [...prevTodos, { ...updateTodo, title, isCompleted: false }]);
     setTitle("");
-  },[title, addTodo]);
+  },[title]);
 
   return (
     <div>
