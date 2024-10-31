@@ -1,0 +1,18 @@
+.todo_form{
+  display: flex;
+  max-width: 250px;
+  margin: 0;
+}
+
+.input{
+  width: 70%;
+  margin-left: 10px;
+}
+
+.add_btn{
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: lightsteelblue;
+  margin-left: 10px;
+}
